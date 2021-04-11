@@ -1,0 +1,84 @@
+plugins {
+	id 'org.springframework.boot' version '2.4.3'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id 'java'
+	id 'org.hidetake.swagger.generator' version '2.18.2'
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+
+}
+
+repositories {
+	mavenCentral()
+	mavenLocal()
+}
+/*configurations {
+	implementation {
+		exclude(group: 'org.slf4j', module: 'slf4j-api')
+	}
+}*/
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.projectlombok:lombok:1.18.18'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+	compile("com.oracle:ojdbc8:18.2")
+
+	compileOnly 'org.projectlombok:lombok:1.18.16'
+	annotationProcessor 'org.projectlombok:lombok:1.18.16'
+
+	testCompileOnly 'org.projectlombok:lombok:1.18.16'
+	testAnnotationProcessor 'org.projectlombok:lombok:1.18.16'
+
+	//implementation 'io.swagger:swagger-codegen-cli:2.4.2'             // Swagger Codegen V2
+	implementation group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.3'
+	implementation group: 'io.springfox', name: 'springfox-swagger2', version: '2.7.0'
+	implementation group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.7.0'
+    //implementation group: 'org.slf4j', name: 'slf4j-log4j12', version:'1.7.26'
+
+
+	//swaggerCodegen 'io.swagger.codegen.v3:swagger-codegen-cli:3.0.5'  // or Swagger Codegen V3
+	//swaggerCodegen 'org.openapitools:openapi-generator-cli:3.3.4'     // or OpenAPI Generator
+
+	/*compile('io.swagger:swagger-codegen-cli:2.4.2')
+	{
+		exclude group: 'io.swagger', module: 'swagger-codegen-cli'
+	}*/
+	//implementation "io.springfox:springfox-boot-starter:3.0.0"
+}
+/*configurations {
+	classpath {
+		exclude group: 'ch.qos.logback', module: 'logback-classic'
+	}
+}*/
+
+/*configurations.all {
+	exclude module: 'slf4j-log4j12'
+}*/
+
+test {
+	useJUnitPlatform()
+}
+
+swaggerSources {
+	petstore {
+		inputFile = file('petstore.yaml')
+		code {
+			language = 'spring'
+		}
+	}
+}
+
